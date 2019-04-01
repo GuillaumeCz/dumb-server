@@ -12,4 +12,5 @@ const createRandomNote = (req, res) => {
   return res.json(note);
 }
 
+
 export default { index, createRandomNote };
