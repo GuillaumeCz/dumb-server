@@ -2,11 +2,14 @@ import express from 'express';
 
 import indexCtrl from './../controllers/index.ctrl';
 
+import noteRoutes from './note.route';
+
 const router = express.Router();
 
 router
-  /* Index */
   .get('/', indexCtrl.index)
-  .get('/random', indexCtrl.createRandomNote)
+  .get('/health-check', (req, res) => res.send('OK'))
+
+router.use('/notes', noteRoutes);
 
 export default router;

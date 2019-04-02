@@ -1,7 +1,7 @@
 import express from 'express';
 import path from 'path';
 
-import indexRouter from './routes/index.router';
+import indexRouter from './routes/index.route';
 
 const app = express();
 

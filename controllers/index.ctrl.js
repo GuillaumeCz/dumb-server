@@ -7,10 +7,4 @@ const index = (req, res) =>  {
   return res.json(blap);
 }
 
-const createRandomNote = (req, res) => {
-  const note = new Note('hell');
-  return res.json(note);
-}
-
-
-export default { index, createRandomNote };
+export default { index };
