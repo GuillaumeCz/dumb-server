@@ -1,27 +1,11 @@
 import express from 'express';
-import mongoose from 'mongoose';
 import path from 'path';
-import dotenv from 'dotenv';
 
+import config from './config/config';
+import database from './config/database';
 import indexRouter from './routes/index.route';
 
 const app = express();
-
-const PORT = 3000;
-const ENV = dotenv.config().parsed;
-
-const mongoUri = ENV.MONGO_HOST + ENV.MONGO_NAME;
-const mongoPort = ENV.MONGO_PORT;
-
-mongoose.set('useCreateIndex', true);
-mongoose.connect(mongoUri, { useNewUrlParser: true, useFindAndModify: false });
-
-const db = mongoose.connection;
-db.on('error', () => {
-  throw new Error(`Unable to connect to database: ${mongoUri}`);
-});
-
-db.once('open', () => console.log(`Connected to database: ${mongoUri}:${mongoPort}`));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -30,6 +14,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/health-check', (req, res) => res.json('Ok'));
 app.use('/api', indexRouter);
 
-app.listen(PORT, console.log(`running on ${PORT}`))
+app.listen(config.port, console.log(`running on ${config.port}`))
 
 export default app;
