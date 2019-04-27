@@ -8,7 +8,6 @@ const router = express.Router();
 
 router
   .get('/', indexCtrl.index)
-  .get('/health-check', (req, res) => res.send('OK'))
 
 router.use('/notes', noteRoutes);
 

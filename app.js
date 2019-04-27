@@ -23,12 +23,12 @@ db.on('error', () => {
 
 db.once('open', () => console.log(`Connected to database: ${mongoUri}:${mongoPort}`));
 
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.use('/health-check', (req, res) => res.json('Ok'));
+app.use('/api', indexRouter);
 
 app.listen(PORT, console.log(`running on ${PORT}`))
 
