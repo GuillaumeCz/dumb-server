@@ -1,3 +1,5 @@
+import status from 'http-status';
+
 import Note from './../models/note.model';
 
 const getNotes = (req, res, err) => {
@@ -12,7 +14,7 @@ const getNote = (req, res, next) => {
   Note.findById(noteId)
     .exec()
     .then(note => res.json(note))
-    .catch(e => next(e));
+    .catch(e => res.status(status.NOT_FOUND).send({ error: 'Not found' }));
 };
 
 
@@ -32,12 +34,7 @@ const addNote = (req, res, next) => {
 
 const editNote = (req, res, next) => {
   const noteId = req.params.noteId;
-  const data = {
-    title: req.body.title,
-    content: req.body.content
-  };
-
-  Note.findOneAndUpdate({ _id: noteId }, data, )
+  Note.findByIdAndUpdate(noteId, req.body, { new: true })
     .then(note => res.json(note))
     .catch(err => next(err));
 }
