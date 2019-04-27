@@ -10,6 +10,7 @@ router.route('/')
 
 router.route('/:noteId')
   .get(noteCtrl.getNote)
-  .put(noteCtrl.editNote);
+  .put(noteCtrl.editNote)
+  .delete(noteCtrl.deleteNote);
 
 export default router;

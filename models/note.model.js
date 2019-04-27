@@ -1,8 +1,21 @@
 import uuidv1 from 'uuid/v1';
+import mongoose from 'mongoose';
 
-export default class Note {
-  constructor(_title) {
-    this.id = uuidv1();
-    this.title = _title;
-  }
-};
+/**
+ * Note Storage Schema
+ */
+const NoteSchema = new mongoose.Schema({
+  title: String,
+  content: String
+});
+
+NoteSchema.virtual('id')
+  .get(function () {
+    return this._id;
+  })
+  .set(function (id){
+    this._id = id;
+  })
+
+const NoteModel = mongoose.model('Note', NoteSchema);
+export { NoteModel as default, NoteSchema };
