@@ -18,7 +18,7 @@ npm start
 npm run test
 ```
 
-## Todos - Good to have ;)
+## Todos - Nice to have ;)
 - Authentication system on a part of the API (such as /admin/...)
 - Add a tag (array) attribute for notes
   - Maybe define a Tag model ? 
