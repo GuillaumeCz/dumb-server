@@ -2,19 +2,19 @@ import status from 'http-status';
 
 import Note from './../models/note.model';
 
-const getNotes = (req, res, err) => {
+const getNotes = (req, res, err, next) => {
   Note.find({})
     .exec()
     .then(notes => res.json(notes))
-    .catch(err => next(err));
+    .catch(error => next(error));
 };
 
-const getNote = (req, res, next) => {
+const getNote = (req, res) => {
   const noteId = req.params.noteId;
   Note.findById(noteId)
     .exec()
     .then(note => res.json(note))
-    .catch(e => res.status(status.NOT_FOUND).send({ error: 'Not found' }));
+    .catch(() => res.status(status.NOT_FOUND).send({ error: 'Not found' }));
 };
 
 
@@ -42,7 +42,7 @@ const editNote = (req, res, next) => {
 const deleteNote = (req, res, next) => {
   const noteId = req.params.noteId;
   Note.findByIdAndDelete(noteId)
-    .then(note => res.json(true))
+    .then(() => res.json(true))
     .catch(err => next(err));
 }
 

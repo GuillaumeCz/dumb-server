@@ -1,5 +1,3 @@
-import Note from '../models/note.model';
-
 const index = (req, res) =>  {
   var blap = {
     hello: 'world'
