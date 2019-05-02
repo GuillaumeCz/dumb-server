@@ -2,20 +2,17 @@ import status from 'http-status';
 
 import Note from './../models/note.model';
 
-const getNotes = (req, res, next) => {
+const getNotes = (req, res, next) => 
   Note.find({})
     .exec()
     .then(notes => res.json(notes))
     .catch(error => next(error));
-};
 
-const getNote = (req, res) => {
-  const noteId = req.params.id;
-  Note.findById(noteId)
+const getNote = (req, res) => 
+  Note.findById(req.params.id)
     .exec()
     .then(note => res.json(note))
     .catch(() => res.status(status.NOT_FOUND).send({ error: 'Not found' }));
-};
 
 
 const addNote = (req, res, next) => {
@@ -32,18 +29,14 @@ const addNote = (req, res, next) => {
     .catch(err => next(err));
 };
 
-const editNote = (req, res, next) => {
-  const noteId = req.params.id;
-  Note.findByIdAndUpdate(noteId, req.body, { new: true })
+const editNote = (req, res, next) => 
+  Note.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then(note => res.json(note))
     .catch(err => next(err));
-};
 
-const deleteNote = (req, res, next) => {
-  const noteId = req.params.id;
-  Note.findByIdAndDelete(noteId)
+const deleteNote = (req, res, next) => 
+  Note.findByIdAndDelete(req.params.id)
     .then(() => res.json(true))
     .catch(err => next(err));
-};
 
 export default { getNotes, getNote, addNote, editNote, deleteNote };

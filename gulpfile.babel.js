@@ -10,19 +10,18 @@ const paths = {
   }
 };
 
-
 // Clean up dist directory
 gulp.task('clean', () => 
-  gulp.src(['dist/**', 'dist/.*', '!dist'])
-    .pipe(clean())
-);
+  gulp
+    .src(['dist/**', 'dist/.*', '!dist'])
+    .pipe(clean()));
 
 gulp.task('babel', () =>
-  gulp.src(paths.js.src, { sourcemaps: true })
-  .pipe(gulp.dest('dist'))
-  .pipe(babel())
-  .pipe(gulp.dest(paths.js.dest))
-);
+  gulp
+    .src(paths.js.src, { sourcemaps: true })
+    .pipe(gulp.dest(paths.js.dest))
+    .pipe(babel())
+    .pipe(gulp.dest(paths.js.dest)));
 
 gulp.task('nodemon', () => 
   nodemon({
@@ -33,7 +32,5 @@ gulp.task('nodemon', () =>
     env: { 'NODE_ENV': 'development' }
   })
 );
-
-
 
 gulp.task('default', gulp.series('clean', 'babel', 'nodemon'));
