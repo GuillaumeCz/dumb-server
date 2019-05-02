@@ -16,16 +16,10 @@ describe('## Note API\'s', () => {
     content: 'ContentTest1'
   };
 
-  let note2 = {
-    title: 'TitleTest2',
-    content: 'ContentTest2'
-  };
-
-
-  const testNote = (res, noteRef, done) => {
-    const id = res.body._id;
-    const title = res.body.title;
-    const content = res.body.content;
+  const testNote = (note, noteRef, done) => {
+    const id = note._id;
+    const title = note.title;
+    const content = note.content;
 
     expect(id).to.equal(noteRef._id);
     expect(title).to.equal(noteRef.title);
@@ -36,10 +30,10 @@ describe('## Note API\'s', () => {
 
   describe('# POST /api/notes', () => {
     before('Create test note', () => 
-      new Note(note2)
+      new Note(note1)
         .save()
         .then(savedNote => {
-          note2 = savedNote;
+          note1 = savedNote;
         }));
 
     it('...should create a new note', done => {
@@ -61,12 +55,30 @@ describe('## Note API\'s', () => {
     });
   });
 
-  describe('# GET /api/notes/:noteId', () => {
+  describe('# GET /api/notes/', () => {
+    it('...should get all the notes', done => {
+      request(app)
+        .get('/api/notes')
+        .expect(status.OK)
+        .then(res => {
+          const receivedNotes = res.body;
+
+          expect(receivedNotes).to.be.an('array');
+          expect(receivedNotes[0]._id).to.equal(note1._id.toString());
+          expect(receivedNotes[1]._id).to.equal(note._id.toString());
+
+          done();
+        })
+        .catch(done)
+    });
+  });
+
+  describe('# GET /api/notes/:id', () => {
     it('...should get note details', done => {
       request(app)
         .get(`/api/notes/${note._id}`)
         .expect(status.OK)
-        .then(res => testNote(res, note, done))
+        .then(res => testNote(res.body, note, done))
         .catch(done);
     });
 
@@ -79,7 +91,7 @@ describe('## Note API\'s', () => {
           done();
         })
         .catch(done);
-    })
+    });
   });
 
   describe('# PUT /api/notes/:noteId', () => {
@@ -91,7 +103,7 @@ describe('## Note API\'s', () => {
         .put(`/api/notes/${note._id}`)
         .send(note)
         .expect(status.OK)
-        .then(res => testNote(res, note, done))
+        .then(res => testNote(res.body, note, done))
         .catch(done);
     });
   });

@@ -2,7 +2,7 @@ import status from 'http-status';
 
 import Note from './../models/note.model';
 
-const getNotes = (req, res, err, next) => {
+const getNotes = (req, res, next) => {
   Note.find({})
     .exec()
     .then(notes => res.json(notes))
@@ -10,7 +10,7 @@ const getNotes = (req, res, err, next) => {
 };
 
 const getNote = (req, res) => {
-  const noteId = req.params.noteId;
+  const noteId = req.params.id;
   Note.findById(noteId)
     .exec()
     .then(note => res.json(note))
@@ -30,20 +30,20 @@ const addNote = (req, res, next) => {
   return newNote.save()
     .then(note => res.json(note))
     .catch(err => next(err));
-}
+};
 
 const editNote = (req, res, next) => {
-  const noteId = req.params.noteId;
+  const noteId = req.params.id;
   Note.findByIdAndUpdate(noteId, req.body, { new: true })
     .then(note => res.json(note))
     .catch(err => next(err));
-}
+};
 
 const deleteNote = (req, res, next) => {
-  const noteId = req.params.noteId;
+  const noteId = req.params.id;
   Note.findByIdAndDelete(noteId)
     .then(() => res.json(true))
     .catch(err => next(err));
-}
+};
 
 export default { getNotes, getNote, addNote, editNote, deleteNote };

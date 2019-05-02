@@ -8,7 +8,7 @@ router.route('/')
   .get(noteCtrl.getNotes)
   .post(noteCtrl.addNote);
 
-router.route('/:noteId')
+router.route('/:id')
   .get(noteCtrl.getNote)
   .put(noteCtrl.editNote)
   .delete(noteCtrl.deleteNote);
