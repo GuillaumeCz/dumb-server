@@ -19,8 +19,8 @@ npm run test
 ```
 
 ## Todos - Nice to have ;)
-- Authentication system on a part of the API (such as /admin/...)
+- Authentication system on a part of the API (such as /admin/...) + user management system
 - Add a tag (array) attribute for notes
-  - Maybe define a Tag model ? 
+  - Tag model is done, need to link it to Notes
   - In order to filter by tag on GET such as /api/note?tag=climbing
 
