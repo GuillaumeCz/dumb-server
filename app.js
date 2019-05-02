@@ -11,8 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/health-check', (req, res) => res.json('Ok'));
-app.use('/api', indexRouter);
+app.use('/', indexRouter);
 
 app.listen(config.port, console.log(`running on ${config.port}`))
 

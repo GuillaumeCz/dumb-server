@@ -53,7 +53,6 @@ describe('## Tag API\'s', () => {
   });
 
   describe('# GET /api/tags', () => {
-    console.log("avanv")
     it('...should get all the tags', done => {
       request(app)
         .get('/api/tags')
