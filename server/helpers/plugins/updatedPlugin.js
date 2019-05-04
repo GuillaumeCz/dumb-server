@@ -1,4 +1,4 @@
-const updatedPlugin = schema => {
+const updatedPlugin = schema =>
   schema
     .add({
       updated: {
@@ -6,6 +6,5 @@ const updatedPlugin = schema => {
         default: Date.now
       }
     });
-};
 
 export default updatedPlugin;

@@ -1,6 +1,6 @@
 import express from 'express';
 
-import noteCtrl from './../../controllers/note.ctrl';
+import noteCtrl from './note.ctrl';
 
 const router = express.Router();
 

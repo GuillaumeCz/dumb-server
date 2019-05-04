@@ -4,8 +4,8 @@ import { expect } from 'chai';
 
 import app from '../app.js';
 
-import Note from '../server/models/note.model';
-import Tag from '../server/models/tag.model';
+import Note from '../server/notes/note.model';
+import Tag from '../server/tags/tag.model';
 
 before('Clean up test data', () => Promise.all([Note.deleteMany({}), Tag.deleteMany({})]));
 

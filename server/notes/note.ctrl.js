@@ -1,6 +1,6 @@
 import status from 'http-status';
 
-import Note from './../models/note.model';
+import Note from './note.model';
 
 const getNotes = (req, res, next) => 
   Note.find({})

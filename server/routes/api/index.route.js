@@ -1,7 +1,7 @@
 import express from 'express';
 
-import noteRoutes from './note.route';
-import tagRoutes from './tag.route';
+import noteRoutes from './../../notes/note.route';
+import tagRoutes from './../../tags/tag.route';
 
 const router = express.Router();
 

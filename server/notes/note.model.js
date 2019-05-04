@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
-import createdPlugin from './plugins/created';
-import updatedPlugin from './plugins/updated';
+import createdPlugin from './../helpers/plugins/createdPlugin';
+import updatedPlugin from './../helpers/plugins/updatedPlugin';
 
 /**
  * Note Storage Schema

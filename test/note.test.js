@@ -3,7 +3,7 @@ import status from 'http-status';
 import { expect } from 'chai';
 
 import app from '../app.js';
-import Note from '../server/models/note.model.js';
+import Note from '../server/notes/note.model.js';
 
 describe('## Note API\'s', () => {
   let note = {

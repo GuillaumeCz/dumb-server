@@ -1,6 +1,6 @@
 import status from 'http-status';
 
-import Tag from './../models/tag.model';
+import Tag from './tag.model';
 
 const getTags = (req, res, next) =>
   Tag.find({})
