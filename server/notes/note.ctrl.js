@@ -30,7 +30,7 @@ const addNote = (req, res, next) => {
 };
 
 const editNote = (req, res, next) => 
-  Note.findByIdAndUpdate(req.params.id, req.body, { new: true })
+  Note.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
     .then(note => res.json(note))
     .catch(err => next(err));
 

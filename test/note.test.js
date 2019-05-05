@@ -16,15 +16,12 @@ describe('## Note API\'s', () => {
     content: 'ContentTest1'
   };
 
-  const testNote = (note, noteRef, done) => {
-    const id = note._id;
-    const title = note.title;
-    const content = note.content;
-
-    expect(id).to.equal(noteRef._id);
-    expect(title).to.equal(noteRef.title);
-    expect(content).to.equal(noteRef.content);
-
+  const testNote = (_note, noteRef, done) => {
+    // expect(_note._id).to.equal(noteRef._id);
+    expect(_note.title).to.equal(noteRef.title);
+    expect(_note.content).to.equal(noteRef.content);
+    expect(_note).to.have.property('updated').to.not.be.undefined;
+    expect(_note).to.have.property('created').to.not.be.undefined;
     done();
   };
 
@@ -37,18 +34,20 @@ describe('## Note API\'s', () => {
         }));
 
     it('...should create a new note', done => {
+      const moment = new Date();
       request(app)
         .post('/api/notes')
         .send(note)
         .expect(status.OK)
         .then(res => {
-          const title = res.body.title;
-          const content = res.body.content;
+          const resNote = res.body;
 
-          expect(title).to.equal(note.title);
-          expect(content).to.equal(note.content);
+          expect(resNote.title).to.equal(note.title);
+          expect(resNote.content).to.equal(note.content);
+          expect(resNote).to.have.property('updated').to.not.be.undefined;
+          expect(resNote).to.have.property('created').to.not.be.undefined;
 
-          note = res.body;
+          note = resNote;
           done();
         })
         .catch(done);
@@ -103,7 +102,12 @@ describe('## Note API\'s', () => {
         .put(`/api/notes/${note._id}`)
         .send(note)
         .expect(status.OK)
-        .then(res => testNote(res.body, note, done))
+        .then(res => {
+          const resNote = res.body;
+          expect(resNote.updated).to.not.equal(note.updated);
+          expect(resNote.created).to.equal(note.created);
+          testNote(resNote, note, done);
+        })
         .catch(done);
     });
   });

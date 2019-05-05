@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 
-import createdPlugin from './../helpers/plugins/createdPlugin';
-import updatedPlugin from './../helpers/plugins/updatedPlugin';
+import plugins from './../helpers/plugins';
 
 /**
  * Note Storage Schema
@@ -11,8 +10,8 @@ const NoteSchema = new mongoose.Schema({
   content: String
 });
 
-NoteSchema.plugin(createdPlugin);
-NoteSchema.plugin(updatedPlugin);
+NoteSchema.plugin(plugins.createdPlugin);
+NoteSchema.plugin(plugins.updatedPlugin);
 
 NoteSchema.virtual('id')
   .get(function () {

@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 
-import createdPlugin from './../helpers/plugins/createdPlugin';
-import updatedPlugin from './../helpers/plugins/updatedPlugin';
+import plugins from './../helpers/plugins';
 
 /**
  * Tag Storage Schema
@@ -10,8 +9,8 @@ const TagSchema = new mongoose.Schema({
   name: String
 });
 
-TagSchema.plugin(createdPlugin);
-TagSchema.plugin(updatedPlugin);
+TagSchema.plugin(plugins.createdPlugin);
+TagSchema.plugin(plugins.updatedPlugin);
 
 
 const TagModel = mongoose.model('Tag', TagSchema);

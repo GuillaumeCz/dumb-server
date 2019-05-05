@@ -20,12 +20,12 @@ describe('## Tag API\'s', () => {
     name: 'TestTag1'
   };
 
-  const testTag = (res, tag, done) => {
-    const id = res.body._id;
-    const name = res.body.name;
-
-    expect(id).to.equal(tag._id);
-    expect(name).to.equal(tag.name);
+  const testTag = (_tag, tagRef, done) => {
+    expect(_tag._id).to.equal(tagRef._id);
+    expect(_tag.title).to.equal(tagRef.title);
+    expect(_tag.content).to.equal(tagRef.content);
+    expect(_tag).to.have.property('updated').to.not.be.undefined;
+    expect(_tag).to.have.property('created').to.not.be.undefined;
     done();
   };
 
@@ -43,9 +43,13 @@ describe('## Tag API\'s', () => {
         .send(tag)
         .expect(status.OK)
         .then(res => {
-          const name = res.body.name;
-          expect(name).to.equal(tag.name);
-          tag = res.body;
+          const resTag = res.body;
+
+          expect(resTag.name).to.equal(tag.name);
+          expect(resTag).to.have.property('updated').to.not.be.undefined;
+          expect(resTag).to.have.property('created').to.not.be.undefined;
+
+          tag = resTag;
           done();
         })
         .catch(done);
@@ -71,13 +75,14 @@ describe('## Tag API\'s', () => {
       request(app)
         .get(`/api/tags/${tag._id}`)
         .expect(status.OK)
-        .then(res => testTag(res, tag, done))
+        .then(res => testTag(res.body, tag, done))
         .catch(done);
     });
   });
 
   describe('# GET /api/tag/:id/notes', () => {
     it('...should get the notes referencing a tag', done => {
+      // TODO
       done();
     });
   });
@@ -90,7 +95,7 @@ describe('## Tag API\'s', () => {
         .put(`/api/tags/${tag._id}`)
         .send(tag)
         .expect(status.OK)
-        .then(res => testTag(res, tag, done))
+        .then(res => testTag(res.body, tag, done))
         .catch(done);
     });
   });

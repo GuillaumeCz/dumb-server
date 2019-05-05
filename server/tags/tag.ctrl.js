@@ -27,7 +27,7 @@ const addTag = (req, res, next) => {
 };
 
 const editTag = (req, res, next) =>
-  Tag.findByIdAndUpdate(req.params.id, req.body, { new: true })
+  Tag.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
     .then(tag => res.json(tag))
     .catch(err => next(err));
 

@@ -3,7 +3,7 @@ import path from 'path';
 
 import config from './config/config';
 import database from './config/database';
-import indexRouter from './server/routes/index.route';
+import indexRouter from './server/routes';
 
 const app = express();
 
