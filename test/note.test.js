@@ -5,7 +5,7 @@ import { expect } from 'chai';
 import app from '../app.js';
 import Note from '../server/models/note.model.js';
 
-describe('## Note API\'s', () => {
+describe("## Note API's", () => {
   let note = {
     title: 'TitleTest',
     content: 'ContentTest'
@@ -29,12 +29,11 @@ describe('## Note API\'s', () => {
   };
 
   describe('# POST /api/notes', () => {
-    before('Create test note', () => 
-      new Note(note1)
-        .save()
-        .then(savedNote => {
-          note1 = savedNote;
-        }));
+    before('Create test note', () =>
+      new Note(note1).save().then(savedNote => {
+        note1 = savedNote;
+      })
+    );
 
     it('...should create a new note', done => {
       request(app)
@@ -69,7 +68,7 @@ describe('## Note API\'s', () => {
 
           done();
         })
-        .catch(done)
+        .catch(done);
     });
   });
 

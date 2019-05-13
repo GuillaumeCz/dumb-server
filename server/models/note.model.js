@@ -15,12 +15,12 @@ NoteSchema.plugin(createdPlugin);
 NoteSchema.plugin(updatedPlugin);
 
 NoteSchema.virtual('id')
-  .get(function () {
+  .get(function() {
     return this._id;
   })
-  .set(function (id){
+  .set(function(id) {
     this._id = id;
-  })
+  });
 
 const NoteModel = mongoose.model('Note', NoteSchema);
 export { NoteModel as default, NoteSchema };

@@ -6,12 +6,12 @@ import app from '../app';
 import Note from '../server/models/note.model';
 import Tag from '../server/models/tag.model';
 
-describe('## Tag API\'s', () => {
+describe("## Tag API's", () => {
   let note = {
     title: 'TitleTest',
     content: 'ContentTest'
   };
-  
+
   let tag = {
     name: 'TestTag'
   };
@@ -29,12 +29,11 @@ describe('## Tag API\'s', () => {
     done();
   };
 
-  before('Create test tag', () => 
-    new Tag(tag1)
-      .save()
-      .then(savedTag => {
-        tag1 = savedTag;
-      }));
+  before('Create test tag', () =>
+    new Tag(tag1).save().then(savedTag => {
+      tag1 = savedTag;
+    })
+  );
 
   describe('# POST /api/tags', () => {
     it('.../should create a new tag', done => {
@@ -59,7 +58,7 @@ describe('## Tag API\'s', () => {
         .expect(status.OK)
         .then(res => {
           const receivedTags = res.body;
-          expect(receivedTags[1]._id.toString()).to.equal(tag._id.toString())
+          expect(receivedTags[1]._id.toString()).to.equal(tag._id.toString());
           done();
         })
         .catch(done);
@@ -84,7 +83,7 @@ describe('## Tag API\'s', () => {
 
   describe('# PUT /api/tag/:id', () => {
     it('...should update a tag', done => {
-      tag.name = "newName";
+      tag.name = 'newName';
 
       request(app)
         .put(`/api/tags/${tag._id}`)

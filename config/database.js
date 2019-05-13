@@ -12,6 +12,8 @@ db.on('error', () => {
   throw new Error(`Unable to connect to database: ${mongoUri}`);
 });
 
-db.once('open', () => console.log(`Connected to database: ${mongoUri}:${config.mongo.port}`));
+db.once('open', () =>
+  console.log(`Connected to database: ${mongoUri}:${config.mongo.port}`)
+);
 
 export { db as default };

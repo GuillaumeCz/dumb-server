@@ -20,8 +20,9 @@ const addTag = (req, res, next) => {
   const newTag = new Tag({
     name: name
   });
-  
-  return newTag.save()
+
+  return newTag
+    .save()
     .then(tag => res.json(tag))
     .catch(err => next(err));
 };

@@ -13,7 +13,6 @@ const TagSchema = new mongoose.Schema({
 TagSchema.plugin(createdPlugin);
 TagSchema.plugin(updatedPlugin);
 
-
 const TagModel = mongoose.model('Tag', TagSchema);
 
 export { TagModel as default, TagSchema };
