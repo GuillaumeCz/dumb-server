@@ -6,7 +6,8 @@
     "start": "node ./dist/app.js",
     "serve": "gulp nodemon",
     "test": "mocha --require @babel/register --colors --exit",
-    "lint": "eslint server; exit 0"
+    "lint": "eslint server; exit 0",
+    "prettier": "prettier --single-quote all --write ./**/*.js"
   },
   "husky": {
     "hooks": {
@@ -35,6 +36,7 @@
     "gulp-nodemon": "^2.4.2",
     "husky": "^2.1.0",
     "mocha": "^6.1.4",
+    "prettier": "1.17.1",
     "run-sequence": "^2.2.1",
     "supertest": "^4.0.2"
   }
